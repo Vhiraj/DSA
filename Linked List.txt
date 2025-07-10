@@ -1,0 +1,104 @@
+Linked List
+"""
+Linked List Implementation in Python
+Features:
+- Insert at end
+- Delete by value
+- Access by index
+- Display the list
+Usage:
+Run the script and use the menu to perform operations.
+Author: Vhiraj
+"""
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+# Initialize the head of the list
+head = None
+def insert():
+    global head
+    try:
+        data = int(input("Enter value to insert: "))
+        new_node = Node(data)
+        if head is None:
+            head = new_node
+        else:
+            temp = head
+            while temp.next is not None:
+                temp = temp.next
+            temp.next = new_node
+        print(data, "inserted.")
+    except ValueError:
+        print("Please enter a valid integer.")
+def delete():
+    global head
+    try:
+        key = int(input("Enter value to delete: "))
+        temp = head
+        prev = None
+        while temp is not None and temp.data != key:
+            prev = temp
+            temp = temp.next
+        if temp is None:
+            print("Value not found.")
+        elif prev is None:
+            head = temp.next
+            print(key, "deleted from head.")
+        else:
+            prev.next = temp.next
+            print(key, "deleted.")
+    except ValueError:
+        print("Please enter a valid integer.")
+def access():
+    global head
+    try:
+        index = int(input("Enter index to access (0-based): "))
+        temp = head
+        i = 0
+        while temp is not None:
+            if i == index:
+                print("Value at index", index, ":", temp.data)
+                return
+            temp = temp.next
+            i += 1
+        print("Index out of range.")
+    except ValueError:
+        print("Please enter a valid integer.")
+def display():
+    global head
+    temp = head
+    if temp is None:
+        print("List is empty.")
+        return
+    print("Linked List: ", end="")
+    while temp is not None:
+        print(temp.data, end=" -> ")
+        temp = temp.next
+    print("None")
+# Menu
+def menu():
+    while True:
+        print("\n--- Linked List Menu ---")
+        print("1. Insert")
+        print("2. Delete")
+        print("3. Access by index")
+        print("4. Display")
+        print("5. Exit")
+        choice = input("Enter your choice (1-5): ")
+        if choice == "1":
+            insert()
+        elif choice == "2":
+            delete()
+        elif choice == "3":
+            access()
+        elif choice == "4":
+            display()
+        elif choice == "5":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Try again.")
+# Run the program
+if __name__ == "__main__":
+    menu()
