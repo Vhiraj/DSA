@@ -1,0 +1,80 @@
+
+import numpy as np
+
+class Stack:
+    def __init__(self, capacity):
+        """
+        Initializes an empty stack with the given capacity.
+        """
+        self.capacity = capacity
+        self.stack = np.empty(capacity, dtype=object)
+        self.head = -1  # Represents the top of the stack
+
+    def push(self, data):
+        """
+        Pushes data onto the stack if it's not full.
+        """
+        if self.head < self.capacity - 1:
+            self.head += 1
+            self.stack[self.head] = data
+            print(f"{data} pushed to stack.")
+        else:
+            print("⚠️ Stack Overflow")
+
+    def pop(self):
+        """
+        Pops the top element from the stack if it's not empty.
+        """
+        if self.head >= 0:
+            popped = self.stack[self.head]
+            self.stack[self.head] = None
+            self.head -= 1
+            print(f"{popped} popped from stack.")
+        else:
+            print("⚠️ Stack Underflow")
+
+    def display(self):
+        """
+        Displays the current stack.
+        """
+        if self.head == -1:
+            print("Stack is empty.")
+        else:
+            print("Stack contents (top to bottom):")
+            for i in range(self.head, -1, -1):
+                print(f"→ {self.stack[i]}")
+
+def main():
+    try:
+        n = int(input("Enter the number of elements for the stack: "))
+        my_stack = Stack(n)
+
+        while True:
+            print("\n___ MENU ___")
+            print("1. Push")
+            print("2. Pop")
+            print("3. Display")
+            print("4. Exit")
+            choice = input("Enter your choice: ")
+
+            if choice == "1":
+                data = input("Enter data to push: ")
+                my_stack.push(data)
+
+            elif choice == "2":
+                my_stack.pop()
+
+            elif choice == "3":
+                my_stack.display()
+
+            elif choice == "4":
+                print("Exiting program...")
+                break
+
+            else:
+                print("Invalid choice. Please try again.")
+    except ValueError:
+        print("Please enter valid integers for input.")
+
+if __name__ == "__main__":
+    main()
