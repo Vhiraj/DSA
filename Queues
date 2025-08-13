@@ -1,0 +1,92 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.head = self.rear = None
+
+    def enqueue(self):
+        x = input("Enter data : ")
+        new_node = Node(x)    
+        if self.head == None:
+            self.head = self.rear = new_node
+        else:
+            self.rear.next = new_node
+            self.rear = self.rear.next
+
+    def dequeue(self):
+        if self.head == None:
+            print("Queue Underflow!")
+        else:
+            x = self.head.data
+            self.head = self.head.next
+            print("The Data that was dequeued was : ", x)
+            if self.head == None:
+                self.rear = None
+
+    def display(self):
+        if self.head == None:
+            print("No Queue!")
+        else:
+            temp = self.head
+            print("The Queue is : ", end="")
+            while temp != None:
+                print(temp.data, end=" -> ")
+                temp = temp.next
+            print("None")
+
+    def peek(self):
+        if self.head == None:
+            print("No Queue")
+        else:
+            print("The value at the top of the queue is : ", self.head.data)
+
+    def isEmpty(self):
+        if self.head == None:
+            print("\nThe Queue is Empty!")
+        else:
+            print("The Queue is not empty!")
+
+    def clear(self):
+        self.head = None
+        self.rear = None
+
+choice = 0
+q = Queue()
+        while choice != 7:
+    print("\n====MENU====\n")
+    print("1. Enqueue")
+    print("2. Dequeue")
+    print("3. Display")
+    print("4. Peek")
+    print("5. IsEmpty?")
+    print("6. Clear")
+    print("7. Exit")
+    print("\n==============\n")
+    
+    while True:
+        try:
+            choice = int(input("Enter your choice : "))
+        except:
+            print("Enter a valid integer!")
+        else:
+            break
+    if choice == 1:
+        q.enqueue()
+    elif choice == 2:
+        q.dequeue()
+    elif choice == 3:
+        q.display()
+    elif choice == 4:
+        q.peek()
+    elif choice == 5:
+        q.isEmpty()
+    elif choice == 6:
+        q.clear()
+    elif choice == 7:
+        print("\nExitting...")
+    else:
+        print("Enter a valid choice!")
+
